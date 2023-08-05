@@ -2,13 +2,19 @@ package com.example.orderreader.model;
 
 import lombok.*;
 
-@Builder
+import java.security.cert.CertPathBuilder;
+
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @Getter
 public class Product {
-
     private Long productId;
     private Double value;
+
+    public static Product with(Long productId, Double value) {
+        final var product = new Product();
+        product.productId = productId;
+        product.value = value;
+        return product;
+    }
 }

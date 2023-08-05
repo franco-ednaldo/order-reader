@@ -4,17 +4,50 @@ package com.example.orderreader.model;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-@Builder
+
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
+@Setter
 @ToString
 public class Order {
-
     private Long orderId;
-    private Long total;
+    private Double total;
+
     private LocalDate date;
+
     private List<Product> products;
+
+    public static Order with(final Long orderId, final LocalDate date) {
+        final var order = new Order();
+        order.setOrderId(orderId);
+        order.setDate(date);
+        order.total = 0.0;
+        return order;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return orderId.equals(order.orderId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderId);
+    }
+
+    public void addProduct(final Product item) {
+        if (Objects.isNull(products)) {
+            products = new ArrayList<>();
+        }
+        total += item.getValue();
+        this.products.add(item);
+    }
 }

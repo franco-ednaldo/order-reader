@@ -8,8 +8,8 @@ public enum TextFormat {
     VALUE_PRODUCT(76, 87),
     DATE(87, 95);
 
-    private int start;
-    private  int end;
+    private final int start;
+    private final int end;
 
     private TextFormat(int start, int end) {
         this.start = start;

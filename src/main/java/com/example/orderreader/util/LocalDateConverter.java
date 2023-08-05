@@ -8,8 +8,7 @@ public class LocalDateConverter {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
-        LocalDate localDate = LocalDate.parse(date, formatter);
+        return LocalDate.parse(date, formatter);
 
-        return localDate;
     }
 }

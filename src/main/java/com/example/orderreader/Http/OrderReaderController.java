@@ -29,8 +29,7 @@ public class OrderReaderController {
     public List<CustomerResponse> getOrders(@RequestParam("files") List<MultipartFile> files) {
         log.info("#### START PROCESS FILES ###");
         final var response = orderService.process(files);
-        final var customerResponse = mapper.customerToResponse(response);
-        return customerResponse;
+        return mapper.customerToResponse(response);
     }
 
 }
