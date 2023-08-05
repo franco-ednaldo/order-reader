@@ -5,8 +5,8 @@ public enum TextFormat {
     NAME(11, 55),
     ORDER_ID(57, 66),
     PRODUCT_ID(67, 75),
-    VALUE_PRODUCT(79, 91),
-    DATE(92, 100);
+    VALUE_PRODUCT(76, 87),
+    DATE(87, 95);
 
     private int start;
     private  int end;
