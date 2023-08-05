@@ -12,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +24,6 @@ public class ProcessTextFile implements ProcessFile {
         log.info("##### PROCESS FILE .TXT ######");
         try (var reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
             String line = null;
-            List<CustomerOrder> result = new ArrayList<>();
             Map<Integer,CustomerOrder> mapCustomer = new HashMap<>();
 
             while ((line = reader.readLine()) != null) {
@@ -48,7 +46,9 @@ public class ProcessTextFile implements ProcessFile {
 
                 mapCustomer.put(customerNew.getUserId(), customerNew);
             }
-            return new ArrayList<>( mapCustomer.values());
+
+
+            return mapCustomer.values().stream().toList();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
