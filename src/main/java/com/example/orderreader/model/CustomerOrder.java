@@ -14,7 +14,7 @@ public class CustomerOrder {
     private Integer userId;
 
     private String name;
-    private Set<Order> orders;
+    private Set<Order> orders = new HashSet<>();;
 
     public static CustomerOrder with(Integer userId, String name) {
         final var customer = new CustomerOrder();
@@ -24,10 +24,7 @@ public class CustomerOrder {
     }
 
     public void addOrder(final Order orderNew) {
-        if (Objects.isNull(orders)) {
-            orders = new HashSet<>();
-        }
-        if (orders.contains(orderNew)) {
+        if (!orders.add(orderNew)) {
            orders.stream()
                     .filter(item -> item.equals(orderNew))
                     .findFirst()
@@ -35,8 +32,6 @@ public class CustomerOrder {
                         final var productSelected = orderNew.getProducts().stream().toList();
                         productSelected.forEach(currentOrder::addProduct);
                     });
-        } else {
-            orders.add(orderNew);
         }
     }
 }
