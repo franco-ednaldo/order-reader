@@ -1,4 +1,4 @@
-package com.example.orderreader.enums;
+package com.example.order.reader.enums;
 
 public enum TextFormat {
     USER_ID(0, 10),

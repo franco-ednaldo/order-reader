@@ -1,8 +1,7 @@
-package com.example.orderreader.enums;
+package com.example.order.reader.enums;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import java.lang.constant.Constable;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;

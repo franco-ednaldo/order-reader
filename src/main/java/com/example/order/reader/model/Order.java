@@ -1,4 +1,4 @@
-package com.example.orderreader.model;
+package com.example.order.reader.model;
 
 
 import lombok.*;

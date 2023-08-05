@@ -1,9 +1,8 @@
-package com.example.orderreader.model;
+package com.example.order.reader.model;
 
 import lombok.*;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 
@@ -14,7 +13,7 @@ public class CustomerOrder {
     private Integer userId;
 
     private String name;
-    private Set<Order> orders = new HashSet<>();;
+    private Set<Order> orders = new HashSet<>();
 
     public static CustomerOrder with(Integer userId, String name) {
         final var customer = new CustomerOrder();

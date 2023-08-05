@@ -1,9 +1,9 @@
-package com.example.orderreader.service;
+package com.example.order.reader.service;
 
-import com.example.orderreader.enums.TypeFile;
-import com.example.orderreader.mapper.CustomerMapper;
-import com.example.orderreader.model.CustomerOrder;
-import com.example.orderreader.service.process.ProcessFile;
+import com.example.order.reader.enums.TypeFile;
+import com.example.order.reader.mapper.CustomerMapper;
+import com.example.order.reader.model.CustomerOrder;
+import com.example.order.reader.service.process.ProcessFile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,7 +22,7 @@ public class OrderService {
 
     public List<CustomerOrder> process(final List<MultipartFile> files) {
         return files.stream()
-                .map(file -> parser(file))
+                .map(this::parser)
                 .flatMap(List::stream)
                 .toList();
 

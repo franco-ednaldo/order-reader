@@ -1,7 +1,7 @@
-package com.example.orderreader.mapper;
+package com.example.order.reader.mapper;
 
-import com.example.orderreader.Http.res.CustomerResponse;
-import com.example.orderreader.model.CustomerOrder;
+import com.example.order.reader.http.res.CustomerResponse;
+import com.example.order.reader.model.CustomerOrder;
 import org.mapstruct.Mapper;
 
 import java.util.List;

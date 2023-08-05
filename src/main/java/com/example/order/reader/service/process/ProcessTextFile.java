@@ -1,11 +1,11 @@
-package com.example.orderreader.service.process;
+package com.example.order.reader.service.process;
 
-import com.example.orderreader.enums.TextFormat;
-import com.example.orderreader.enums.TypeFile;
-import com.example.orderreader.model.CustomerOrder;
-import com.example.orderreader.model.Order;
-import com.example.orderreader.model.Product;
-import com.example.orderreader.util.LocalDateConverter;
+import com.example.order.reader.enums.TextFormat;
+import com.example.order.reader.enums.TypeFile;
+import com.example.order.reader.model.CustomerOrder;
+import com.example.order.reader.model.Product;
+import com.example.order.reader.model.Order;
+import com.example.order.reader.util.LocalDateConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;

@@ -1,8 +1,6 @@
-package com.example.orderreader.model;
+package com.example.order.reader.model;
 
 import lombok.*;
-
-import java.security.cert.CertPathBuilder;
 
 @NoArgsConstructor
 @ToString

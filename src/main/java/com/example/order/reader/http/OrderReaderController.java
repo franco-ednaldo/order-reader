@@ -1,8 +1,8 @@
-package com.example.orderreader.Http;
+package com.example.order.reader.http;
 
-import com.example.orderreader.Http.res.CustomerResponse;
-import com.example.orderreader.mapper.CustomerMapper;
-import com.example.orderreader.service.OrderService;
+import com.example.order.reader.http.res.CustomerResponse;
+import com.example.order.reader.mapper.CustomerMapper;
+import com.example.order.reader.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

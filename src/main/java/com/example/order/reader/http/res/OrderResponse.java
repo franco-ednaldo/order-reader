@@ -1,4 +1,4 @@
-package com.example.orderreader.Http.res;
+package com.example.order.reader.http.res;
 
 
 import java.time.LocalDate;
