@@ -3,18 +3,14 @@ package com.example.orderreader.model;
 import lombok.*;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
-@Setter
 @ToString
 public class CustomerOrder {
-
     private Integer userId;
 
     private String name;
@@ -22,8 +18,8 @@ public class CustomerOrder {
 
     public static CustomerOrder with(Integer userId, String name) {
         final var customer = new CustomerOrder();
-        customer.setUserId(userId);
-        customer.setName(name);
+        customer.userId = userId;
+        customer.name = name;
         return customer;
     }
 
@@ -37,7 +33,7 @@ public class CustomerOrder {
                     .findFirst()
                     .ifPresent(currentOrder -> {
                         final var productSelected = orderNew.getProducts().stream().toList();
-                        productSelected.forEach(item -> currentOrder.addProduct(item));
+                        productSelected.forEach(currentOrder::addProduct);
                     });
         } else {
             orders.add(orderNew);

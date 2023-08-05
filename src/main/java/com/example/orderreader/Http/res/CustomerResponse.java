@@ -1,7 +1,5 @@
 package com.example.orderreader.Http.res;
 
-import lombok.Builder;
-
 import java.util.List;
 
 public record CustomerResponse(
@@ -10,6 +8,4 @@ public record CustomerResponse(
         List<OrderResponse> orders
 
 ) {
-    @Builder
-    public CustomerResponse {}
 }

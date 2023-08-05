@@ -10,5 +10,4 @@ public record OrderResponse(
         LocalDate date,
         List<ProductResponse> products
 ) {
-    public OrderResponse {}
 }

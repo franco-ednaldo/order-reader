@@ -6,5 +6,4 @@ public record ProductResponse(
         Double value
         ) {
 
-    public ProductResponse {}
 }
