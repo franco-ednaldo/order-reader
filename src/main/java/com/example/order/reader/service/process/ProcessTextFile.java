@@ -2,11 +2,11 @@ package com.example.order.reader.service.process;
 
 import com.example.order.reader.enums.TextFormat;
 import com.example.order.reader.enums.TypeFile;
+import com.example.order.reader.exception.ErrorParserFile;
 import com.example.order.reader.model.CustomerOrder;
 import com.example.order.reader.model.Product;
 import com.example.order.reader.model.Order;
 import com.example.order.reader.util.LocalDateConverter;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,15 +17,12 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-@Slf4j
 public class ProcessTextFile implements ProcessFile {
     @Override
     public List<CustomerOrder> process(final MultipartFile file) {
-        log.info("##### PROCESS FILE .TXT ######");
         try (var reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
             String line = null;
             Map<Integer,CustomerOrder> mapCustomer = new HashMap<>();
-
             while ((line = reader.readLine()) != null) {
                 var fieldUserId = line.substring(TextFormat.USER_ID.getStart(), TextFormat.USER_ID.getEnd()).trim();
                 var fieldName = line.substring(TextFormat.NAME.getStart(), TextFormat.NAME.getEnd()).trim();
@@ -46,13 +43,10 @@ public class ProcessTextFile implements ProcessFile {
 
                 mapCustomer.put(customerNew.getUserId(), customerNew);
             }
-
             return mapCustomer.values().stream().toList();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            throw new ErrorParserFile("File processing error", ex);
         }
-
-        return List.of();
     }
 
     @Override
