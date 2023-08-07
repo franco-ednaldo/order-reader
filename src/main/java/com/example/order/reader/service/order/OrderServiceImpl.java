@@ -1,4 +1,4 @@
-package com.example.order.reader.service;
+package com.example.order.reader.service.order;
 
 import com.example.order.reader.enums.TypeFile;
 import com.example.order.reader.exception.FileProcessNotFound;
@@ -11,12 +11,12 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @Service
-public class OrderService {
+public class OrderServiceImpl implements OrderService {
     private final CustomerMapper mapper;
 
     private final List<ProcessFile> processFiles;
 
-    public OrderService(final CustomerMapper mapper, final  List<ProcessFile> processFiles){
+    public OrderServiceImpl(final CustomerMapper mapper, final  List<ProcessFile> processFiles){
         this.mapper = mapper;
         this.processFiles = processFiles;
     }

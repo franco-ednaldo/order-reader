@@ -1,17 +1,14 @@
 package com.example.order.reader.http;
 
-import com.example.order.reader.mapper.CustomerMapper;
 import com.example.order.reader.mapper.CustomerMapperImpl;
-import com.example.order.reader.service.OrderService;
+import com.example.order.reader.service.order.OrderService;
 import com.example.order.reader.service.process.ProcessTextFile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;

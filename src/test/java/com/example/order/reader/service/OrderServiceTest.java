@@ -1,6 +1,8 @@
 package com.example.order.reader.service;
 
 import com.example.order.reader.mapper.CustomerMapper;
+import com.example.order.reader.service.order.OrderService;
+import com.example.order.reader.service.order.OrderServiceImpl;
 import com.example.order.reader.service.process.ProcessFile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -32,7 +34,7 @@ class OrderServiceTest {
     public void setup() {
         MockitoAnnotations.openMocks(this);
         List<ProcessFile> processFiles = Collections.singletonList(processFileMock);
-        orderService = new OrderService(mapper, processFiles);
+        orderService = new OrderServiceImpl(mapper, processFiles);
     }
 
     @Test
