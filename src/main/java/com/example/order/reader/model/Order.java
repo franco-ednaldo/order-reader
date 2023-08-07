@@ -10,6 +10,7 @@ import java.util.Objects;
 
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -28,7 +29,6 @@ public class Order {
         order.total = 0.0;
         return order;
     }
-
 
     @Override
     public boolean equals(Object o) {

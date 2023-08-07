@@ -3,6 +3,7 @@ package com.example.order.reader.model;
 import lombok.*;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @Getter
 public class Product {

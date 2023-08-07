@@ -1,6 +1,7 @@
 package com.example.order.reader.service;
 
 import com.example.order.reader.enums.TypeFile;
+import com.example.order.reader.exception.FileProcessNotFound;
 import com.example.order.reader.mapper.CustomerMapper;
 import com.example.order.reader.model.CustomerOrder;
 import com.example.order.reader.service.process.ProcessFile;
@@ -25,14 +26,13 @@ public class OrderService {
                 .map(this::parser)
                 .flatMap(List::stream)
                 .toList();
-
     }
 
     private List<CustomerOrder> parser(final MultipartFile file) {
         final var processFile = processFiles.stream()
                 .filter(type -> type.accept(TypeFile.getFileByExtension(file)))
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(() -> new FileProcessNotFound("Type of process not found."));
 
         return processFile.process(file);
     }

@@ -7,6 +7,7 @@ import java.util.Set;
 
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @ToString
 public class CustomerOrder {
