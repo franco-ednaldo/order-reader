@@ -7,9 +7,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface ProcessFile {
-
-
     List<CustomerOrder> process(MultipartFile file);
-
     Boolean accept(TypeFile type);
 }

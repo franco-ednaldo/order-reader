@@ -47,7 +47,6 @@ public class ProcessTextFile implements ProcessFile {
                 mapCustomer.put(customerNew.getUserId(), customerNew);
             }
 
-
             return mapCustomer.values().stream().toList();
         } catch (Exception ex) {
             ex.printStackTrace();
