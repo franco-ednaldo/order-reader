@@ -27,7 +27,6 @@ public class OrderReaderController {
 
     @PostMapping
     public List<CustomerResponse> getOrders(@RequestParam("files") List<MultipartFile> files) {
-        log.info("#### START PROCESS FILES ###");
         final var response = orderService.process(files);
         return mapper.customerToResponse(response);
     }

@@ -1,16 +1,11 @@
 package com.example.order.reader.exception;
 
-public class ErrorParserFile extends RuntimeException {
+public class ErrorParserFile extends BusinessException {
 
-    public ErrorParserFile(final String message, Throwable ex) {
-        super(message, ex);
-    }
-    public ErrorParserFile(final String message) {
+    public ErrorParserFile(String message) {
         super(message);
     }
-
-    public ErrorParserFile() {
-        super();
+    public ErrorParserFile(String message, Exception ex) {
+        super(message, ex);
     }
-
 }
