@@ -7,7 +7,7 @@ API que recebe um ou mais arquivos com informações de pedido fitos pelos os cl
 - [Spring Boot](http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/)
 - [Maven](https://maven.apache.org/)
 - [Lombok](hhttps://projectlombok.org/)
-- [Docker](hhttps://projectlombok.org/)
+- [Docker](https://projectlombok.org/)
 - [Docker-compose](https://docs.docker.com/compose/)
 
 ## Executar a Aplicação
