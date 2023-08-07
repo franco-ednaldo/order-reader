@@ -1,12 +1,15 @@
 package com.example.order.reader.model;
 
 
+import com.example.order.reader.enums.TextFormat;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import static com.example.order.reader.util.LocalDateConverter.*;
 
 
 @NoArgsConstructor
@@ -22,11 +25,15 @@ public class Order {
 
     private List<Product> products;
 
-    public static Order with(final Long orderId, final LocalDate date) {
+    public static Order with(final String line) {
+        var fieldOrderId = line.substring(TextFormat.ORDER_ID.getStart(), TextFormat.ORDER_ID.getEnd()).trim();
+        var fieldOrderDate = line.substring(TextFormat.DATE.getStart(), TextFormat.DATE.getEnd()).trim();
+
         final var order = new Order();
-        order.setOrderId(orderId);
-        order.setDate(date);
+        order.setOrderId(Long.valueOf(fieldOrderId));
+        order.setDate(formatStringToLocalDate(fieldOrderDate));
         order.total = 0.0;
+
         return order;
     }
 

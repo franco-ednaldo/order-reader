@@ -12,18 +12,18 @@ public class CustomerMock {
 
     public static List<CustomerOrder> customerMock() {
         return List.of(
-                new CustomerOrder(1,
-                        "User test",
-                        Set.of(new Order(
-                                        1l,
-                                        2000.0,
-                                        LocalDate.now(),
-                                        List.of(
-                                            new Product(1l, 2000.0)
-                                        )
-                                )
-                        )
-                )
+//                new CustomerOrder(1,
+//                        "User test",
+//                        Set.of(new Order(
+//                                        1l,
+//                                        2000.0,
+//                                        LocalDate.now(),
+//                                        List.of(
+//                                            new Product(1l, 2000.0)
+//                                        )
+//                                )
+//                        )
+//                )
         );
     }
 
