@@ -24,6 +24,12 @@ public class CustomerMock {
                 "1836.7420210308");
     }
 
+    public static List<String> mockLineWithError() {
+        return List.of("0000000070                              " +
+                "Palmer Prosaccoadsfadfadfadfasdfasdfasdfasdfasdfasdfasfsfasdf00000000000000000000000007530000000003     " +
+                "1836.7420210308");
+    }
+
     public static Order mockOrder() {
         final var order = new Order();
         order.setOrderId(753l);

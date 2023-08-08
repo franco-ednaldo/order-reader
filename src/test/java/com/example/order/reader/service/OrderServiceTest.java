@@ -5,6 +5,8 @@ import static com.example.order.reader.service.mock.CustomerMock.mockOrder;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+import com.example.order.reader.exception.ErrorParserFile;
+import com.example.order.reader.exception.FileProcessNotFound;
 import com.example.order.reader.model.Order;
 import com.example.order.reader.service.order.OrderService;
 import com.example.order.reader.service.order.OrderServiceImpl;
@@ -19,7 +21,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.*;
 
 import static com.example.order.reader.enums.TypeFile.FILE_TEXT;
@@ -88,12 +89,15 @@ class OrderServiceTest {
         final var exceptedMessage = "Type of process not found.";
         when(processFileMock.accept(any())).thenReturn(false);
 
-        final var exception = assertThrows(Exception.class, () -> {
+        final var exception = assertThrows(FileProcessNotFound.class, () -> {
             orderService.processFile(mockLine(), FILE_TEXT);
         });
 
+        assertAll("Exception details",
+                () -> assertTrue(exception instanceof FileProcessNotFound),
+                () -> assertEquals(exceptedMessage, exception.getMessage())
+        );
 
-        assertTrue(exception.getMessage().contains(exceptedMessage));
         verify(processFileMock, times(1)).accept(any());
         verify(processFileMock, never()).process(any());
         verifyNoMoreInteractions(processFileMock);
