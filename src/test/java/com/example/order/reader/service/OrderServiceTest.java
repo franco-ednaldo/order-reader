@@ -89,9 +89,8 @@ class OrderServiceTest {
         final var exceptedMessage = "Type of process not found.";
         when(processFileMock.accept(any())).thenReturn(false);
 
-        final var exception = assertThrows(FileProcessNotFound.class, () -> {
-            orderService.processFile(mockLine(), FILE_TEXT);
-        });
+        final var exception = assertThrows(FileProcessNotFound.class, () ->
+            orderService.processFile(mockLine(), FILE_TEXT));
 
         assertAll("Exception details",
                 () -> assertTrue(exception instanceof FileProcessNotFound),
