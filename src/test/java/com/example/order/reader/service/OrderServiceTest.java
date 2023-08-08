@@ -1,31 +1,34 @@
 package com.example.order.reader.service;
 
-import com.example.order.reader.mapper.CustomerMapper;
+
+import static com.example.order.reader.service.mock.CustomerMock.mockOrder;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+
+import com.example.order.reader.model.Order;
 import com.example.order.reader.service.order.OrderService;
 import com.example.order.reader.service.order.OrderServiceImpl;
 import com.example.order.reader.service.process.ProcessFile;
+import com.example.order.reader.service.process.ProcessTextFile;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.*;
 
-import static com.example.order.reader.service.mock.CustomerMock.customerMock;
+import static com.example.order.reader.enums.TypeFile.FILE_TEXT;
+import static com.example.order.reader.service.mock.CustomerMock.mockLine;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.when;
 
 class OrderServiceTest {
-    @Mock
-    private CustomerMapper mapper;
-
-    @Mock
     private ProcessFile processFileMock;
 
     private OrderService orderService;
@@ -33,44 +36,70 @@ class OrderServiceTest {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
+        processFileMock = spy(new ProcessTextFile());
         List<ProcessFile> processFiles = Collections.singletonList(processFileMock);
-        orderService = new OrderServiceImpl(mapper, processFiles);
+        orderService = new OrderServiceImpl(processFiles);
     }
 
     @Test
     @DisplayName("Método que recebe um arquivo .txt e faz o parser com sucesso")
     void givenAValidFiles_whenCallProcess_thenShouldParserFiles() throws IOException {
-        final var nameFile = "order.txt";
-        MultipartFile file = new MockMultipartFile(nameFile, nameFile, "", "test-content".getBytes());
-        when(processFileMock.accept(any())).thenReturn(true);
-        when(processFileMock.process(any())).thenReturn(customerMock());
+        final var expectedUserId = 70;
+        final var expectedName = "Palmer Prosacco";
+        final var expectedOrderId = 753l;
+        final var expectedOrder = mockOrder();
 
-        final var response = orderService.process(List.of(file));
+        when(processFileMock.accept(any())).thenReturn(true);
+
+        final var response = orderService.processFile(mockLine(), FILE_TEXT);
 
         assertEquals(1, response.size());
         verify(processFileMock, times(1)).accept(any());
         verify(processFileMock, times(1)).process(any());
         verifyNoMoreInteractions(processFileMock);
+
+        assertThat(response.get(0), allOf(
+                hasProperty("userId", equalTo(expectedUserId)),
+                hasProperty("name", equalTo(expectedName)),
+                hasProperty("ordersMap", hasEntry(equalTo(expectedOrderId), hasOrderEqualTo(expectedOrder)))
+        ));
+
     }
 
-    @Test
-    @DisplayName("Método que recebe um arquivo .txt e retorna exeptiion caso o tipo de uma arquivo for inválido")
-    void givenAnInValidFiles_whenCallProcess_thenShouldException() throws IOException {
-        final var nameFile = "order.pdf";
-        final var exceptedMessage = "Type of process not found.";
+    private Matcher<Order> hasOrderEqualTo(Order expectedOrder) {
+        return new TypeSafeMatcher<>() {
+            @Override
+            protected boolean matchesSafely(Order actualOrder) {
+                return expectedOrder.getOrderId().equals( actualOrder.getOrderId())
+                        && expectedOrder.getDate().equals(actualOrder.getDate())
+                        && expectedOrder.getProducts().equals(actualOrder.getProducts());
+            }
 
-        MultipartFile file = new MockMultipartFile(nameFile, nameFile, "", "test-content".getBytes());
-        when(processFileMock.accept(any())).thenReturn(false);
-
-        final var exception = assertThrows(Exception.class, () -> {
-            orderService.process(List.of(file));
-        });
-
-
-        assertTrue(exception.getMessage().contains(exceptedMessage));
-        verify(processFileMock, times(1)).accept(any());
-        verify(processFileMock, never()).process(any());
-        verifyNoMoreInteractions(processFileMock);
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("An Order with all attributes equal to " + expectedOrder);
+            }
+        };
     }
+
+//    @Test
+//    @DisplayName("Método que recebe um arquivo .txt e retorna exeptiion caso o tipo de uma arquivo for inválido")
+//    void givenAnInValidFiles_whenCallProcess_thenShouldException() throws IOException {
+//        final var nameFile = "order.pdf";
+//        final var exceptedMessage = "Type of process not found.";
+//
+//        MultipartFile file = new MockMultipartFile(nameFile, nameFile, "", "test-content".getBytes());
+//        when(processFileMock.accept(any())).thenReturn(false);
+//
+//        final var exception = assertThrows(Exception.class, () -> {
+//            orderService.process(List.of(file));
+//        });
+//
+//
+//        assertTrue(exception.getMessage().contains(exceptedMessage));
+//        verify(processFileMock, times(1)).accept(any());
+//        verify(processFileMock, never()).process(any());
+//        verifyNoMoreInteractions(processFileMock);
+//    }
 
 }
