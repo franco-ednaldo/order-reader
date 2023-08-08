@@ -6,25 +6,36 @@ import com.example.order.reader.model.Product;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 public class CustomerMock {
 
     public static List<CustomerOrder> customerMock() {
         return List.of(
-//                new CustomerOrder(1,
-//                        "User test",
-//                        Set.of(new Order(
-//                                        1l,
-//                                        2000.0,
-//                                        LocalDate.now(),
-//                                        List.of(
-//                                            new Product(1l, 2000.0)
-//                                        )
-//                                )
-//                        )
-//                )
+                CustomerOrder.with(
+                        "0000000070                              " +
+                                "Palmer Prosacco00000007530000000003     " +
+                                "1836.7420210308")
         );
     }
+
+    public static List<String> mockLine() {
+        return List.of("0000000070                              " +
+                "Palmer Prosacco00000007530000000003     " +
+                "1836.7420210308");
+    }
+
+    public static Order mockOrder() {
+        final var order = new Order();
+        order.setOrderId(753l);
+        order.setDate(LocalDate.of(2021, 3, 8));
+        order.setTotal(1836.74);
+        final var products = new Product();
+        products.setProductId(3l);
+        products.setValue(1836.74);
+        order.setProducts(List.of(products));
+        return  order;
+    }
+
+
 
 }

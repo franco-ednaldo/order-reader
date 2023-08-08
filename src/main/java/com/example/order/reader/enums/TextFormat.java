@@ -3,7 +3,7 @@ package com.example.order.reader.enums;
 public enum TextFormat {
     USER_ID(0, 10),
     NAME(11, 55),
-    ORDER_ID(57, 66),
+    ORDER_ID(57, 65),
     PRODUCT_ID(67, 75),
     VALUE_PRODUCT(76, 87),
     DATE(87, 95);

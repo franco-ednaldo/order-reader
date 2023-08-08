@@ -13,8 +13,6 @@ import java.util.*;
 public class CustomerOrder {
     private Integer userId;
     private String name;
-    private Set<Order> orders = new HashSet<>();
-
     private Map<Long, Order> ordersMap = new HashMap();
 
     public static CustomerOrder with(final String orderLine) {
