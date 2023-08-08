@@ -82,24 +82,21 @@ class OrderServiceTest {
         };
     }
 
-//    @Test
-//    @DisplayName("Método que recebe um arquivo .txt e retorna exeptiion caso o tipo de uma arquivo for inválido")
-//    void givenAnInValidFiles_whenCallProcess_thenShouldException() throws IOException {
-//        final var nameFile = "order.pdf";
-//        final var exceptedMessage = "Type of process not found.";
-//
-//        MultipartFile file = new MockMultipartFile(nameFile, nameFile, "", "test-content".getBytes());
-//        when(processFileMock.accept(any())).thenReturn(false);
-//
-//        final var exception = assertThrows(Exception.class, () -> {
-//            orderService.process(List.of(file));
-//        });
-//
-//
-//        assertTrue(exception.getMessage().contains(exceptedMessage));
-//        verify(processFileMock, times(1)).accept(any());
-//        verify(processFileMock, never()).process(any());
-//        verifyNoMoreInteractions(processFileMock);
-//    }
+    @Test
+    @DisplayName("Método que recebe um arquivo .txt e retorna exeptiion caso o tipo de uma arquivo for inválido")
+    void givenAnInValidFiles_whenCallProcess_thenShouldException() throws IOException {
+        final var exceptedMessage = "Type of process not found.";
+        when(processFileMock.accept(any())).thenReturn(false);
+
+        final var exception = assertThrows(Exception.class, () -> {
+            orderService.processFile(mockLine(), FILE_TEXT);
+        });
+
+
+        assertTrue(exception.getMessage().contains(exceptedMessage));
+        verify(processFileMock, times(1)).accept(any());
+        verify(processFileMock, never()).process(any());
+        verifyNoMoreInteractions(processFileMock);
+    }
 
 }
