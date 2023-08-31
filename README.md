@@ -11,10 +11,8 @@ API que recebe um ou mais arquivos com informações de pedido fitos pelos os cl
 - [Docker-compose](https://docs.docker.com/compose/)
 
 ## Executar a Aplicação
-
 Para executar é neessário subir o projeto local os seguinte comando deve ser execultado
 - Executando localmente
     - Start da aplicação:
       > docker-compose up --build
-
 Ao executar a aplicação localmente, é criado uma imagem [Docker](https://www.docker.com/), caso não tenha o docker instalado segue o link: [instalar o Docker](https://docs.docker.com/install/)
